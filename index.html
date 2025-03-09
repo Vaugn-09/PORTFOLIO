@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="script.js">
+        // Custom cursor
+const cursor = document.querySelector('.cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+
+// Smooth scroll for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Progress bar
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrolled / maxHeight) * 100;
+    document.querySelector('.progress-bar').style.width = progress + '%';
+});
+
+// Animate elements on scroll
+const observerOptions = {
+    threshold: 0.2
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.project-card, .skill-card, .section-title').forEach(el => {
+    observer.observe(el);
+});
+
+// Form animation
+const inputGroups = document.querySelectorAll('.input-group input, .input-group textarea');
+inputGroups.forEach(input => {
+    input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+    });
+    input.addEventListener('blur', () => {
+        if (!input.value) {
+            input.parentElement.classList.remove('focused');
+        }
+    });
+});
+
+// Animated text typing effect
+const text = document.querySelector('.animated-text');
+const originalText = text.textContent;
+text.textContent = '';
+let i = 0;
+
+function typeWriter() {
+    if (i < originalText.length) {
+        text.textContent += originalText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+
+typeWriter();
+// Add this to your existing script.js
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        const techTags = card.querySelectorAll('.project-tech span');
+        techTags.forEach((tag, index) => {
+            tag.style.transitionDelay = `${index * 0.1}s`;
+            tag.style.transform = 'translateY(-5px)';
+        });
+    });
+
+    card.addEventListener('mouseleave', () => {
+        const techTags = card.querySelectorAll('.project-tech span');
+        techTags.forEach(tag => {
+            tag.style.transitionDelay = '0s';
+            tag.style.transform = 'translateY(0)';
+        });
+    });
+});
+    </script>
+
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="progress-bar"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">Portfolio</div>
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="animated-text">Creative Developer</h1>
+                <p class="subtitle">Turning ideas into digital reality</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn primary">View Projects</a>
+                    <a href="#contact" class="btn secondary">Let's Talk</a>
+                </div>
+            </div>
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="profile.jpg" alt="Profile" class="profile-pic">
+                    <div class="experience-badge">5+ Years Experience</div>
+                </div>
+                <div class="experience-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Senior Frontend Developer</h3>
+                            <h4>Tech Innovation Labs</h4>
+                            <p class="timeline-date">2022 - Present</p>
+                            <ul class="job-highlights">
+                                <li>Led development of enterprise-scale React applications</li>
+                                <li>Mentored junior developers and implemented code review processes</li>
+                                <li>Reduced load times by 40% through performance optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Full Stack Developer</h3>
+                            <h4>Digital Solutions Co.</h4>
+                            <p class="timeline-date">2020 - 2022</p>
+                            <ul class="job-highlights">
+                                <li>Built and maintained 15+ client websites using MERN stack</li>
+                                <li>Implemented CI/CD pipelines reducing deployment time by 60%</li>
+                                <li>Developed custom CMS solutions for content management</li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Web Developer</h3>
+                            <h4>Creative Agency X</h4>
+                            <p class="timeline-date">2019 - 2020</p>
+                            <ul class="job-highlights">
+                                <li>Created responsive websites for small businesses</li>
+                                <li>Collaborated with design team on UI/UX improvements</li>
+                                <li>Integrated third-party APIs and payment gateways</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                          </section>
+                            <section id="projects" class="projects-section">
+                      <h2 class="section-title">Featured Projects</h2>
+                      <div class="project-grid">
+                          <!-- Project 1 -->
+                          <article class="project-card">
+                              <div class="project-image">
+                                  <img src="project1.jpg" alt="E-Commerce Platform">
+                                  <div class="project-overlay">
+                                      <div class="project-links">
+                                          <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                          <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="project-info">
+                                  <h3>E-Commerce Platform</h3>
+                                  <p>Full-stack e-commerce solution with real-time inventory management</p>
+                                  <div class="project-tech">
+                                      <span>React</span>
+                                      <span>Node.js</span>
+                                      <span>MongoDB</span>
+                                  </div>
+                              </div>
+                          </article>
+
+                          <!-- Project 2 -->
+                          <article class="project-card">
+                              <div class="project-image">
+                                  <img src="project2.jpg" alt="Task Management App">
+                                  <div class="project-overlay">
+                                      <div class="project-links">
+                                          <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                          <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="project-info">
+                                  <h3>Task Management App</h3>
+                                  <p>Collaborative task tracking with real-time updates</p>
+                                  <div class="project-tech">
+                                      <span>Vue.js</span>
+                                      <span>Firebase</span>
+                                      <span>Chart.js</span>
+                                  </div>
+                              </div>
+                          </article>
+
+                          <!-- Project 3 -->
+                          <article class="project-card">
+                              <div class="project-image">
+                                  <img src="project3.jpg" alt="AI Image Generator">
+                                  <div class="project-overlay">
+                                      <div class="project-links">
+                                          <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                          <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="project-info">
+                                  <h3>AI Image Generator</h3>
+                                  <p>Machine learning powered image generation tool</p>
+                                  <div class="project-tech">
+                                      <span>Python</span>
+                                      <span>TensorFlow</span>
+                                      <span>Flask</span>
+                                  </div>
+                              </div>
+                          </article>
+                      </div>
+                  </section>
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="input-group">
+                        <input type="text" name="name" required>
+                        <label>Name</label>
+                        <span class="input-highlight"></span>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" required>
+                        <label>Email</label>
+                        <span class="input-highlight"></span>
+                    </div>
+                    <div class="input-group">
+                        <textarea name="message" required></textarea>
+                        <label>Message</label>
+                        <span class="input-highlight"></span>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Your Portfolio. Crafted with passion.</p>
+    </footer>
+</body>
+</html>
